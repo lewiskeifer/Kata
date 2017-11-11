@@ -17,6 +17,9 @@ public:
 	//Write a character to the paper
 	void write(char c);
 
+	//Erase a character from the paper
+	void erase(char c);
+
 	//Overload output operator
 	friend std::ostream& operator<< (std::ostream& os, const Paper& paper);
 

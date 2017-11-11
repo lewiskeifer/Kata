@@ -15,11 +15,16 @@ public:
 
 	//Getters
 	int getPointDurability() { return pointDurability; }
+	int getEraserDurability() { return eraserDurability; }
 	int getLength() { return length; }
 
 	//Writes a string to the supplied paper pointer
-	void write(std::string& output, Paper* paper);
+	void write(std::string& toWrite, Paper* paper);
 
+	//Erase a string from the supplied paper pointer
+	void erase(std::string& toErase, Paper* paper);
+
+	//Decrement length and restore initial durability
 	void sharpen();
 
 private:

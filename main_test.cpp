@@ -9,6 +9,7 @@ using namespace std;
 void testPencilAndPaperWrite(Pencil& pencil, Paper* paper);
 void testPencilDurabilityAndPaperLength(Pencil& pencil, Paper* paper);
 void testPencilSharpen(Pencil& pencil);
+void testPencilAndPaperErase(Pencil& pencil, Paper* paper);
 
 //Error handling tests
 //todo
@@ -28,6 +29,7 @@ int main()
 	testPencilAndPaperWrite(pencil, paper);
 	testPencilDurabilityAndPaperLength(pencil, paper);
 	testPencilSharpen(pencil);
+	testPencilAndPaperErase(pencil, paper);
 
 	return 0;
 }
@@ -35,7 +37,7 @@ int main()
 //Write a sample string, assert pencil durability and paper length adjust accordingly
 void testPencilAndPaperWrite(Pencil& pencil, Paper* paper)
 {
-	string test = "Hello world!";
+	string test = "Hello World!";
 
 	pencil.write(test, paper);
 
@@ -69,4 +71,24 @@ void testPencilSharpen(Pencil& pencil)
 
 	assert(pencil.getPointDurability() == pointDurability);
 	assert(pencil.getLength() == pencilLength - 1);
+}
+
+//Erase entire sheet, assert pencil eraser is 0 and paper sheet is full
+void testPencilAndPaperErase(Pencil& pencil, Paper* paper)
+{
+	//Erase 365 to 0
+	for (int i = 365; i >= 0; --i)
+	{
+		string s = to_string(i);
+		pencil.erase(s, paper);
+	}
+
+	//Erase "Hello Word!"
+	string test = "Hello World!";
+	pencil.erase(test, paper);
+
+	assert(pencil.getEraserDurability() == 0);
+	assert(paper->getCurrentLength() == 0);
+
+	cout << *paper << endl;
 }

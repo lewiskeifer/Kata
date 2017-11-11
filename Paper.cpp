@@ -22,6 +22,20 @@ void Paper::write(char c)
 	currentLength++;
 }
 
+//Erase a character from the paper
+void Paper::erase(char c)
+{
+	for (int i = currentLength - 1; i >= 0; --i)
+	{
+		if (sheet[i] == c)
+		{
+			sheet.erase(sheet.begin() + i);
+			currentLength--;
+			break; //found!
+		}
+	}
+}
+
 //Overload output operator
 ostream& operator<< (ostream& os, const Paper& paper)
 {
