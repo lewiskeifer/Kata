@@ -13,8 +13,10 @@ public:
 	int getCurrentLength() { return currentLength; }
 	bool hasSpace() { return currentLength == length; }
 
+	//Write a character to the paper
 	void write(char c);
 
+	//Overload output operator
 	friend std::ostream& operator<< (std::ostream& os, const Paper& paper);
 
 private:

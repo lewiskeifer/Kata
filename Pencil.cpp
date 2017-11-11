@@ -5,6 +5,7 @@
 using namespace std;
 
 
+//Writes a string to the supplied paper pointer
 void Pencil::write(string& output, Paper* paper)
 {
 	bool doneWriting = false;

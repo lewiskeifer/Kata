@@ -15,11 +15,14 @@ Paper::Paper(const int id_, int length_)
 
 Paper::~Paper() {}
 
+//Write a character to the paper
 void Paper::write(char c)
 {
 	sheet.push_back(c);
+	currentLength++;
 }
 
+//Overload output operator
 ostream& operator<< (ostream& os, const Paper& paper)
 {
 	for (int i = 0; i < paper.currentLength; ++i)

@@ -14,6 +14,7 @@ public:
 
 	int getPointDurability() { return pointDurability; }
 
+	//Writes a string to the supplied paper pointer
 	void write(std::string& output, Paper* paper);
 
 private:
