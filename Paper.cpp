@@ -22,15 +22,28 @@ void Paper::write(char c)
 	currentLength++;
 }
 
-//Erase a character from the paper
+//Erase a character from the paper leaving whitespace behind
+//Does NOT decrement current paper length
 void Paper::erase(char c)
 {
 	for (int i = currentLength - 1; i >= 0; --i)
 	{
 		if (sheet[i] == c)
 		{
-			sheet.erase(sheet.begin() + i);
-			currentLength--;
+			sheet[i] = ' ';
+			break; //found!
+		}
+	}
+}
+
+//Replace the first instance of whitespace with the supplied char
+void Paper::edit(char c)
+{
+	for (int i = 0; i < currentLength; ++i)
+	{
+		if (sheet[i] ==  ' ')
+		{
+			sheet[i] = c;
 			break; //found!
 		}
 	}

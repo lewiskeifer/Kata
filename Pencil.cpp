@@ -39,6 +39,23 @@ void Pencil::erase(string& toErase, Paper* paper)
 	}
 }
 
+//Replace whitespace on the supplied paper pointer with the given string
+void Pencil::edit(std::string& toEdit, Paper* paper)
+{
+	bool doneWriting = false;
+
+	while (pointDurability > 0 && !doneWriting)
+	{
+		for (char c : toEdit)
+		{
+			paper->edit(c);
+			pointDurability--;
+		}
+
+		doneWriting = true;
+	}
+}
+
 //Decrement length and restore initial durability
 void Pencil::sharpen()
 {

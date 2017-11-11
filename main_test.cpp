@@ -10,6 +10,7 @@ void testPencilAndPaperWrite(Pencil& pencil, Paper* paper);
 void testPencilDurabilityAndPaperLength(Pencil& pencil, Paper* paper);
 void testPencilSharpen(Pencil& pencil);
 void testPencilAndPaperErase(Pencil& pencil, Paper* paper);
+void testPencilAndPaperEdit(Pencil& pencil, Paper* paper);
 
 //Error handling tests
 //todo
@@ -31,6 +32,9 @@ int main()
 	testPencilSharpen(pencil);
 	testPencilAndPaperErase(pencil, paper);
 
+	Pencil pencil2(1, pencilLength, pointDurability, eraserDurability);
+	testPencilAndPaperEdit(pencil2, paper);
+
 	return 0;
 }
 
@@ -38,7 +42,6 @@ int main()
 void testPencilAndPaperWrite(Pencil& pencil, Paper* paper)
 {
 	string test = "Hello World!";
-
 	pencil.write(test, paper);
 
 	assert(pencil.getPointDurability() == (pointDurability - test.length()));
@@ -88,7 +91,22 @@ void testPencilAndPaperErase(Pencil& pencil, Paper* paper)
 	pencil.erase(test, paper);
 
 	assert(pencil.getEraserDurability() == 0);
-	assert(paper->getCurrentLength() == 0);
+	assert(paper->getCurrentLength() == paperLength);
+
+	cout << *paper << endl;
+}
+
+//Write "Hello_World!" to the paper, edit the paper to say "Hello_Pillar!"
+void testPencilAndPaperEdit(Pencil& pencil, Paper* paper)
+{
+	string test = "Hello_World!";
+	pencil.edit(test, paper);
+
+	string toErase = "World!";
+	pencil.erase(toErase, paper);
+
+	string toEdit = "Pillar!";
+	pencil.edit(toEdit, paper);
 
 	cout << *paper << endl;
 }

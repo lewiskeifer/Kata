@@ -17,8 +17,12 @@ public:
 	//Write a character to the paper
 	void write(char c);
 
-	//Erase a character from the paper
+	//Erase a character from the paper leaving whitespace behind
+	//Does NOT decrement current paper length
 	void erase(char c);
+
+	//Replace the first instance of whitespace with the supplied char
+	void edit(char c);
 
 	//Overload output operator
 	friend std::ostream& operator<< (std::ostream& os, const Paper& paper);
