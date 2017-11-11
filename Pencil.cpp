@@ -21,3 +21,12 @@ void Pencil::write(string& output, Paper* paper)
 		doneWriting = true;
 	}
 }
+
+void Pencil::sharpen()
+{
+	if (length > 0)
+	{
+		pointDurability = initialPointDurability;
+		length--;
+	}
+}

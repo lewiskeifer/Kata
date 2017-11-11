@@ -10,8 +10,9 @@ public:
 	Paper(const int id_, const int length_);
 	~Paper();
 
+	//Getters
 	int getCurrentLength() { return currentLength; }
-	bool hasSpace() { return currentLength == length; }
+	//bool hasSpace() { return currentLength == length; }
 
 	//Write a character to the paper
 	void write(char c);
