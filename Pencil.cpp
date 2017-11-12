@@ -6,7 +6,7 @@ using namespace std;
 
 
 //Writes a string to the supplied paper pointer
-void Pencil::write(string& toWrite, Paper* paper)
+void Pencil::write(const string& toWrite, Paper* paper)
 {
 	bool doneWriting = false;
 
@@ -23,37 +23,32 @@ void Pencil::write(string& toWrite, Paper* paper)
 }
 
 //Erase a string from the supplied paper pointer
-void Pencil::erase(string& toErase, Paper* paper)
+void Pencil::erase(const string& toErase, Paper* paper)
 {
-	bool doneErasing = false;
-
-	while (eraserDurability > 0 && !doneErasing)
+	if (eraserDurability >= toErase.length())
 	{
-		for (char c : toErase)
-		{
-			paper->erase(c);
-			eraserDurability--;
-		}
-
-		doneErasing = true;
+		paper->erase(toErase);
+		eraserDurability -= toErase.length();
+	}
+	else
+	{
+		//int difference = toErase.length() - eraserDurability;
+		string newStringToErase = toErase.substr(0, eraserDurability);
+		
+		paper->erase(newStringToErase);
+		eraserDurability = 0;
 	}
 }
 
 //Replace whitespace on the supplied paper pointer with the given string
-void Pencil::edit(std::string& toEdit, Paper* paper)
+void Pencil::edit(const std::string& toEdit, Paper* paper)
 {
-	bool doneWriting = false;
-
-	while (pointDurability > 0 && !doneWriting)
+	if (pointDurability >= toEdit.length())
 	{
-		for (char c : toEdit)
-		{
-			paper->edit(c);
-			pointDurability--;
-		}
-
-		doneWriting = true;
+		paper->edit(toEdit);
 	}
+
+	//TODO
 }
 
 //Decrement length and restore initial durability

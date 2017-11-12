@@ -1,8 +1,11 @@
 #include "Paper.h"
 #include "Utility.h"
 #include <iostream>
+#include <iterator>
+#include <algorithm>
 
 using namespace std;
+
 
 Paper::Paper(const int id_, int length_)
 {
@@ -18,34 +21,66 @@ Paper::~Paper() {}
 //Write a character to the paper
 void Paper::write(char c)
 {
-	sheet.push_back(c);
-	currentLength++;
+	if (currentLength != length)
+	{
+		sheet.push_back(c);
+		currentLength++;
+	}
 }
 
 //Erase a character from the paper leaving whitespace behind
 //Does NOT decrement current paper length
-void Paper::erase(char c)
+void Paper::erase(string toErase)
 {
-	for (int i = currentLength - 1; i >= 0; --i)
+	//Use STL reverse iterator to loop through sheet from end to beginning
+	auto it = search(sheet.rbegin(), sheet.rend(), toErase.rbegin(), toErase.rend());
+	if (it == sheet.rend())
 	{
-		if (sheet[i] == c)
+		return; //not found!
+	}
+	else
+	{
+		//Erase string
+		for (int i = 0; i < toErase.size(); ++i)
 		{
-			sheet[i] = ' ';
-			break; //found!
+			*it = ' ';
+			it++;
 		}
 	}
 }
 
 //Replace the first instance of whitespace with the supplied char
-void Paper::edit(char c)
+void Paper::edit(string toEdit)
 {
-	for (int i = 0; i < currentLength; ++i)
+	//Find space to write over
+	int index = -1;
+
+	for (int i = 0; i < currentLength - 1; ++i)
 	{
-		if (sheet[i] ==  ' ')
+		//Found 
+		if (sheet[i] == ' ' && sheet[i + 1] == ' ')
 		{
-			sheet[i] = c;
-			break; //found!
+			if (i == 0) index = 0; //edge case, edit is at start of page
+			else index = i + 1; //normal case
+			
+			break;
 		}
+	}
+
+	if (index < 0) return; //no whitespace found!
+
+	int count = 0;
+	int newStringLength = toEdit.length();
+
+	//Overwrite whitespace
+	for (int i = index; i < currentLength; ++i)
+	{
+		if (count == newStringLength) return; //finished writing
+
+		if (sheet[i] == ' ') sheet[i] = toEdit[count];
+		else sheet[i] = '@';
+
+		count++;
 	}
 }
 

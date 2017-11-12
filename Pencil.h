@@ -19,13 +19,13 @@ public:
 	int getLength() { return length; }
 
 	//Writes a string to the supplied paper pointer
-	void write(std::string& toWrite, Paper* paper);
+	void write(const std::string& toWrite, Paper* paper);
 
 	//Erase a string from the supplied paper pointer
-	void erase(std::string& toErase, Paper* paper);
+	void erase(const std::string& toErase, Paper* paper);
 
 	//Replace whitespace on the supplied paper pointer with the given string
-	void edit(std::string& toEdit, Paper* paper);
+	void edit(const std::string& toEdit, Paper* paper);
 
 	//Decrement length and restore initial durability
 	void sharpen();
