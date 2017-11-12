@@ -10,15 +10,16 @@ When choosing between a simple and complex + fast design, I chose simple every t
 
 Similarly, I chose not to litter the code with try/catches and throws for simplicity.  I included one throw where it is particularly useful (trying to erase a string that doesn't exist), but otherwise when trying to do something illegal, the pencil/paper simply will not let you.  A more robust sample would want to include thorough error message handling to improve maintainability.
 
+<br>
 
 HOW TO RUN:
 
 *Requires c++11
 
-A) Add files into your favorite IDE
-   Run main_test.cpp
+A) Add files into your favorite IDE <br>
+   Run main_test.cpp <br>
 
 or
 
-B) Run linux commmand "make kataexe"
-   Run linux command ".\kataexe"
+B) Run linux commmand "make kataexe" <br>
+   Run linux command ".\kataexe" <br>
