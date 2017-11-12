@@ -16,10 +16,12 @@ HOW TO RUN:
 
 *Requires c++11
 
-A) Add files into your favorite IDE <br>
-   Run main_test.cpp <br>
+A) <br>
+Add files into your favorite IDE <br>
+Run main_test.cpp <br>
 
 or
 
-B) Run linux commmand "make kataexe" <br>
-   Run linux command ".\kataexe" <br>
+B) <br> 
+Run linux commmand "make kataexe" <br>
+Run linux command ".\kataexe" <br>
