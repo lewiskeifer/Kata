@@ -18,6 +18,10 @@ void testPencilAndPaperEmptyEraser(Pencil& pencil, Paper* paper);
 void testPencilTooManySharpens(Pencil& pencil, Paper* paper);
 void testPencilTooManyWrites(Pencil& pencil, Paper* paper);
 void testPaperTooManyWrites(Pencil& pencil, Paper* paper);
+void testPaperEraseNonExistantString(Pencil& pencil, Paper* paper);
+
+//Helper functions
+void printTestCase(int number);
 
 //Global constants
 const int pointDurability = 1000;
@@ -58,15 +62,10 @@ int main()
 	testPencilTooManyWrites(pencil4, paper2);
 	testPaperTooManyWrites(pencil4, paper2);
 
+	//Create standard pencil
+	Pencil pencil5(4, pencilLength, pointDurability, eraserDurability);
+	testPaperEraseNonExistantString(pencil5, paper);
 
-	//try
-	//{
-
-	//}
-	//catch (exception& x) 
-	//{
-	//	cout << x.what() << endl;
-	//}
 
 	delete paper;
 	delete paper2;
@@ -76,6 +75,8 @@ int main()
 //Write a sample string, assert pencil durability and paper length adjust accordingly
 void testPencilAndPaperWrite(Pencil& pencil, Paper* paper)
 {
+	printTestCase(0);
+
 	pencil.write(hello, paper);
 
 	assert(pencil.getPointDurability() == (pointDurability - hello.length()));
@@ -87,6 +88,8 @@ void testPencilAndPaperWrite(Pencil& pencil, Paper* paper)
 //Fill the sheet of paper, assert pencil durability and paper length are "maxed"
 void testPencilDurabilityAndPaperLength(Pencil& pencil, Paper* paper)
 {
+	printTestCase(1);
+
 	int currentDurability = pencil.getPointDurability();
 
 	for (int i = 0; i < currentDurability; ++i)
@@ -104,6 +107,8 @@ void testPencilDurabilityAndPaperLength(Pencil& pencil, Paper* paper)
 //Sharpen a pencil, assert pencil length decrements and durability is restored
 void testPencilSharpen(Pencil& pencil)
 {
+	printTestCase(2);
+
 	pencil.sharpen();
 
 	assert(pencil.getPointDurability() == pointDurability);
@@ -113,6 +118,8 @@ void testPencilSharpen(Pencil& pencil)
 //Erase entire sheet, assert pencil eraser is 0 and paper sheet is full
 void testPencilAndPaperErase(Pencil& pencil, Paper* paper)
 {
+	printTestCase(3);
+
 	//Erase 365 to 0
 	for (int i = 365; i >= 0; --i)
 	{
@@ -132,6 +139,8 @@ void testPencilAndPaperErase(Pencil& pencil, Paper* paper)
 //Write "Hello World!" to the paper, edit the paper to say "Hello Pillar!"
 void testPencilAndPaperEdit(Pencil& pencil, Paper* paper)
 {
+	printTestCase(4);
+
 	pencil.edit(hello, paper);
 
 	string toErase = "World!";
@@ -147,6 +156,8 @@ void testPencilAndPaperEdit(Pencil& pencil, Paper* paper)
 //write a longer string in its place
 void testPencilAndPaperEditCollision(Pencil& pencil, Paper* paper)
 {
+	printTestCase(5);
+
 	string newHello = "Hello Hello World!";
 	pencil.edit(newHello, paper);
 
@@ -162,6 +173,8 @@ void testPencilAndPaperEditCollision(Pencil& pencil, Paper* paper)
 //Test pencil eraser that cannot fully erase specified string
 void testPencilAndPaperEmptyEraser(Pencil& pencil, Paper* paper)
 {
+	printTestCase(6);
+
 	string toErase = "@@@@@@";
 	pencil.erase(toErase, paper);
 
@@ -172,6 +185,8 @@ void testPencilAndPaperEmptyEraser(Pencil& pencil, Paper* paper)
 //Assert illegal sharpen does not restore durability
 void testPencilTooManySharpens(Pencil& pencil, Paper* paper)
 {
+	printTestCase(7);
+
 	pencil.sharpen();
 	assert(pencil.getLength() == 0);
 
@@ -182,8 +197,11 @@ void testPencilTooManySharpens(Pencil& pencil, Paper* paper)
 	assert(pencil.getPointDurability() == pointDurability - hello.length());
 }
 
+//Assert pencil cannot write passed its durability
 void testPencilTooManyWrites(Pencil& pencil, Paper* paper)
 {
+	printTestCase(8);
+
 	pencil.write(hello, paper);
 
 	assert(pencil.getPointDurability() == 0);
@@ -191,8 +209,11 @@ void testPencilTooManyWrites(Pencil& pencil, Paper* paper)
 	cout << *paper << endl;
 }
 
+//Assert paper cannot be written passed its length
 void testPaperTooManyWrites(Pencil& pencil, Paper* paper)
 {
+	printTestCase(9);
+
 	pencil.sharpen();
 	pencil.write(hello, paper);
 
@@ -202,4 +223,24 @@ void testPaperTooManyWrites(Pencil& pencil, Paper* paper)
 	assert(paper->getCurrentLength() == 9);
 
 	cout << *paper << endl;
+}
+
+//Try inserting a fake string, prints out an error message
+void testPaperEraseNonExistantString(Pencil& pencil, Paper* paper)
+{
+	printTestCase(10);
+
+	try
+	{
+		pencil.erase("FakeString", paper);
+	}
+	catch (exception& x) 
+	{
+		cout << x.what() << endl;
+	}
+}
+
+void printTestCase(int number)
+{
+	cout << "\n-----TEST " << number << " -----\n";
 }

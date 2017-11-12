@@ -21,12 +21,6 @@ Paper::~Paper() {}
 //Write a character to the paper
 void Paper::write(const string& toWrite)
 {
-	//if (currentLength != length)
-	//{
-	//	sheet.push_back(c);
-	//	currentLength++;
-	//}
-
 	int count = 0;
 	int newStringLength = toWrite.length();
 
@@ -48,7 +42,8 @@ void Paper::erase(const string& toErase)
 	auto it = search(sheet.rbegin(), sheet.rend(), toErase.rbegin(), toErase.rend());
 	if (it == sheet.rend())
 	{
-		return; //not found!
+		throw Error("String not found!");
+		return;
 	}
 	else
 	{

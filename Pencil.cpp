@@ -8,18 +8,6 @@ using namespace std;
 //Writes a string to the supplied paper pointer
 void Pencil::write(const string& toWrite, Paper* paper)
 {
-	//bool doneWriting = false;
-
-	//while (pointDurability > 0 && !doneWriting)
-	//{
-	//	for (char c : toWrite)
-	//	{
-	//		paper->write(c);
-	//		pointDurability--;
-	//	}
-
-	//	doneWriting = true;
-	//}
 	if (pointDurability >= toWrite.length())
 	{
 		paper->write(toWrite);
