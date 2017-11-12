@@ -1,5 +1,7 @@
 # Kata - Pencils
 
+ABOUT:
+
 A simple program that allows the user to write, erase, and edit paper with a pencil.
 
 Includes a test suite that first tests basic functionality, then runs specific error handling cases.
