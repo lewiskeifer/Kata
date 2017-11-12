@@ -19,20 +19,32 @@ Paper::Paper(const int id_, int length_)
 Paper::~Paper() {}
 
 //Write a character to the paper
-void Paper::write(char c)
+void Paper::write(const string& toWrite)
 {
-	if (currentLength != length)
+	//if (currentLength != length)
+	//{
+	//	sheet.push_back(c);
+	//	currentLength++;
+	//}
+
+	int count = 0;
+	int newStringLength = toWrite.length();
+
+	//Write new string
+	for (int i = currentLength; i < length; ++i)
 	{
-		sheet.push_back(c);
+		if (count == newStringLength) return; //finished writing
+
+		sheet.push_back(toWrite[count++]);
 		currentLength++;
 	}
 }
 
 //Erase a character from the paper leaving whitespace behind
 //Does NOT decrement current paper length
-void Paper::erase(string toErase)
+void Paper::erase(const string& toErase)
 {
-	//Use STL reverse iterator to loop through sheet from end to beginning
+	//Use STL search + reverse iterator to loop through sheet from end to beginning
 	auto it = search(sheet.rbegin(), sheet.rend(), toErase.rbegin(), toErase.rend());
 	if (it == sheet.rend())
 	{
@@ -50,7 +62,7 @@ void Paper::erase(string toErase)
 }
 
 //Replace the first instance of whitespace with the supplied char
-void Paper::edit(string toEdit)
+void Paper::edit(const string& toEdit)
 {
 	//Find space to write over
 	int index = -1;

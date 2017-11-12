@@ -8,17 +8,29 @@ using namespace std;
 //Writes a string to the supplied paper pointer
 void Pencil::write(const string& toWrite, Paper* paper)
 {
-	bool doneWriting = false;
+	//bool doneWriting = false;
 
-	while (pointDurability > 0 && !doneWriting)
+	//while (pointDurability > 0 && !doneWriting)
+	//{
+	//	for (char c : toWrite)
+	//	{
+	//		paper->write(c);
+	//		pointDurability--;
+	//	}
+
+	//	doneWriting = true;
+	//}
+	if (pointDurability >= toWrite.length())
 	{
-		for (char c : toWrite)
-		{
-			paper->write(c);
-			pointDurability--;
-		}
+		paper->write(toWrite);
+		pointDurability -= toWrite.length();
+	}
+	else
+	{
+		string newStringToWrite = toWrite.substr(0, pointDurability);
 
-		doneWriting = true;
+		paper->write(newStringToWrite);
+		pointDurability = 0;
 	}
 }
 
@@ -32,7 +44,6 @@ void Pencil::erase(const string& toErase, Paper* paper)
 	}
 	else
 	{
-		//int difference = toErase.length() - eraserDurability;
 		string newStringToErase = toErase.substr(0, eraserDurability);
 		
 		paper->erase(newStringToErase);
@@ -46,6 +57,7 @@ void Pencil::edit(const std::string& toEdit, Paper* paper)
 	if (pointDurability >= toEdit.length())
 	{
 		paper->edit(toEdit);
+		pointDurability -= toEdit.length();
 	}
 
 	//TODO

@@ -12,7 +12,6 @@ public:
 
 	//Getters
 	int getCurrentLength() { return currentLength; }
-	//bool hasSpace() { return currentLength == length; }
 
 	//Overload output operator
 	friend std::ostream& operator<< (std::ostream& os, const Paper& paper);
@@ -25,17 +24,16 @@ private:
 	int currentLength;
 
 	//Write a character to the paper
-	void write(char c);
+	void write(const std::string& toWrite);
 
 	//Erase a character from the paper leaving whitespace behind
 	//Does NOT decrement current paper length
-	void erase(std::string toErase);
+	void erase(const std::string& toErase);
 
 	//Replace the first instance of whitespace with the supplied char
-	void edit(std::string toEdit);
+	void edit(const std::string& toEdit);
 
 	friend class Pencil; //Allow pencil to access paper's private functions
 };
-
 
 #endif

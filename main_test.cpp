@@ -15,6 +15,9 @@ void testPencilAndPaperEdit(Pencil& pencil, Paper* paper);
 //Error handling tests
 void testPencilAndPaperEditCollision(Pencil& pencil, Paper* paper);
 void testPencilAndPaperEmptyEraser(Pencil& pencil, Paper* paper);
+void testPencilTooManySharpens(Pencil& pencil, Paper* paper);
+void testPencilTooManyWrites(Pencil& pencil, Paper* paper);
+void testPaperTooManyWrites(Pencil& pencil, Paper* paper);
 
 //Global constants
 const int pointDurability = 1000;
@@ -27,6 +30,7 @@ const string hello = "Hello World!";
 
 int main()
 {
+	//Create standard pencil and paper
 	Pencil pencil(0, pencilLength, pointDurability, eraserDurability);
 	Paper* paper = new Paper(0, paperLength);
 
@@ -35,11 +39,25 @@ int main()
 	testPencilSharpen(pencil);
 	testPencilAndPaperErase(pencil, paper);
 
+	//Create pencil with "short" eraser
 	Pencil pencil2(1, pencilLength, pointDurability, 15);
 	
 	testPencilAndPaperEdit(pencil2, paper);
 	testPencilAndPaperEditCollision(pencil2, paper);
 	testPencilAndPaperEmptyEraser(pencil2, paper);
+
+	//Create short pencil, only allows one sharpen
+	Pencil pencil3(2, 1, pointDurability, eraserDurability);
+	
+	testPencilTooManySharpens(pencil3, paper);
+
+	//Create dull pencil and short paper
+	Pencil pencil4(3, pencilLength, 4, eraserDurability);
+	Paper* paper2 = new Paper(1, 9);
+
+	testPencilTooManyWrites(pencil4, paper2);
+	testPaperTooManyWrites(pencil4, paper2);
+
 
 	//try
 	//{
@@ -51,6 +69,7 @@ int main()
 	//}
 
 	delete paper;
+	delete paper2;
 	return 0;
 }
 
@@ -145,6 +164,42 @@ void testPencilAndPaperEmptyEraser(Pencil& pencil, Paper* paper)
 {
 	string toErase = "@@@@@@";
 	pencil.erase(toErase, paper);
+
+	cout << *paper << endl;
+}
+
+//Test pencil sharpen to see if length can go below 0
+//Assert illegal sharpen does not restore durability
+void testPencilTooManySharpens(Pencil& pencil, Paper* paper)
+{
+	pencil.sharpen();
+	assert(pencil.getLength() == 0);
+
+	pencil.write(hello, paper);
+
+	pencil.sharpen();
+	assert(pencil.getLength() == 0);
+	assert(pencil.getPointDurability() == pointDurability - hello.length());
+}
+
+void testPencilTooManyWrites(Pencil& pencil, Paper* paper)
+{
+	pencil.write(hello, paper);
+
+	assert(pencil.getPointDurability() == 0);
+
+	cout << *paper << endl;
+}
+
+void testPaperTooManyWrites(Pencil& pencil, Paper* paper)
+{
+	pencil.sharpen();
+	pencil.write(hello, paper);
+
+	pencil.sharpen();
+	pencil.write(hello, paper);
+
+	assert(paper->getCurrentLength() == 9);
 
 	cout << *paper << endl;
 }
