@@ -14,9 +14,9 @@ public:
 	~Pencil() {}
 
 	//Getters
-	int getPointDurability() { return pointDurability; }
-	int getEraserDurability() { return eraserDurability; }
-	int getLength() { return length; }
+	int getPointDurability() const { return pointDurability; }
+	int getEraserDurability() const { return eraserDurability; }
+	int getLength() const { return length; }
 
 	//Writes a string to the supplied paper pointer
 	void write(const std::string& toWrite, Paper* paper);

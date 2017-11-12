@@ -47,8 +47,13 @@ void Pencil::edit(const std::string& toEdit, Paper* paper)
 		paper->edit(toEdit);
 		pointDurability -= toEdit.length();
 	}
+	else
+	{
+		string newStringToEdit = toEdit.substr(0, pointDurability);
 
-	//TODO
+		paper->edit(newStringToEdit);
+		pointDurability = 0;
+	}
 }
 
 //Decrement length and restore initial durability

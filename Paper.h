@@ -11,7 +11,7 @@ public:
 	~Paper();
 
 	//Getters
-	int getCurrentLength() { return currentLength; }
+	int getCurrentLength() const { return currentLength; }
 
 	//Overload output operator
 	friend std::ostream& operator<< (std::ostream& os, const Paper& paper);

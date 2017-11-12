@@ -19,6 +19,7 @@ void testPencilTooManySharpens(Pencil& pencil, Paper* paper);
 void testPencilTooManyWrites(Pencil& pencil, Paper* paper);
 void testPaperTooManyWrites(Pencil& pencil, Paper* paper);
 void testPaperEraseNonExistantString(Pencil& pencil, Paper* paper);
+void testPencilTooManyEdits(Pencil& pencil, Paper* paper);
 
 //Helper functions
 void printTestCase(int number);
@@ -62,9 +63,11 @@ int main()
 	testPencilTooManyWrites(pencil4, paper2);
 	testPaperTooManyWrites(pencil4, paper2);
 
-	//Create standard pencil
-	Pencil pencil5(4, pencilLength, pointDurability, eraserDurability);
+	//Create dull pencil
+	Pencil pencil5(4, pencilLength, 4, eraserDurability);
+	
 	testPaperEraseNonExistantString(pencil5, paper);
+	testPencilTooManyEdits(pencil5, paper);
 
 
 	delete paper;
@@ -238,6 +241,20 @@ void testPaperEraseNonExistantString(Pencil& pencil, Paper* paper)
 	{
 		cout << x.what() << endl;
 	}
+}
+
+//Erase "Hello" and rewrite it
+//Assert pencil runs out of graphite
+void testPencilTooManyEdits(Pencil& pencil, Paper* paper)
+{
+	printTestCase(11);
+
+	pencil.erase("Hello", paper);
+	pencil.edit("Hello", paper);
+
+	assert(pencil.getPointDurability() == 0);
+
+	cout << *paper << endl;
 }
 
 void printTestCase(int number)
