@@ -16,8 +16,6 @@ Paper::Paper(const int id_, int length_)
 	currentLength = 0;
 }
 
-Paper::~Paper() {}
-
 //Write a character to the paper
 void Paper::write(const string& toWrite)
 {

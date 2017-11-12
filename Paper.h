@@ -23,7 +23,6 @@ public:
 	//Custom ctor allows user to provide a custom ID, no checks
 	//are made for uniqueness of ID
 	Paper(const int id_, const int length_);
-	~Paper();
 
 	//Getters
 	int getCurrentLength() const { return currentLength; }

@@ -22,8 +22,6 @@ public:
 		: id(id_), length(length_), initialPointDurability(pointDurability_), 
 		pointDurability(pointDurability_), eraserDurability(eraserDurability_) {}
 
-	~Pencil() {}
-
 	//Getters
 	int getPointDurability() const { return pointDurability; }
 	int getEraserDurability() const { return eraserDurability; }
