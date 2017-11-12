@@ -257,6 +257,7 @@ void testPencilTooManyEdits(Pencil& pencil, Paper* paper)
 	cout << *paper << endl;
 }
 
+//Used to print out test case headers
 void printTestCase(int number)
 {
 	cout << "\n-----TEST " << number << " -----\n";

@@ -4,9 +4,20 @@
 #include <string>
 class Paper;
 
+/* Pencil class - this class represents a pencil.
+
+Public functions provide the user an interface for writing to the Paper class.
+
+We let the compiler supply the destructor and the copy/move constructors
+and assignment operators.
+*/
+
+
 class Pencil {
 
 public: 
+	//Custom ctor allows user to provide a custom ID, no checks
+	//are made for uniqueness of ID
 	Pencil(const int id_, int length_, int pointDurability_, int eraserDurability_)
 		: id(id_), length(length_), initialPointDurability(pointDurability_), 
 		pointDurability(pointDurability_), eraserDurability(eraserDurability_) {}

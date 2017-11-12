@@ -4,9 +4,24 @@
 #include <string>
 #include <vector>
 
+/* Paper class - this class represents a piece of paper.
+
+Public functions provide ONLY const getter operations.  The user is not 
+allowed to modify paper without a writing utencil.  Pencil is declared
+a friend class to allow access to private paper functions.
+
+The output operator is overloaded for simple paper printing.
+
+We let the compiler supply the destructor and the copy/move constructors
+and assignment operators.
+*/
+
+
 class Paper {
 
 public:
+	//Custom ctor allows user to provide a custom ID, no checks
+	//are made for uniqueness of ID
 	Paper(const int id_, const int length_);
 	~Paper();
 
